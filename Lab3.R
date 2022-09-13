@@ -1,0 +1,33 @@
+getwd()
+setwd("D:\\PS\\Lab")
+data<- read.csv("DATA 3.csv",header=TRUE)
+data
+class(data)
+fix(data)
+names(data)<-c("Age","Gender","Accomadation")
+data$Gender<-factor(data$Gender,c(1,2),c("Male","Female"))
+data$Accomadation<-factor(data$Accomadation,c(1,2,3),c("Stay_at_home","Boarded","Lodging"))
+fix(data)
+
+attach(data)
+Gender
+gender_FreqTable<-table(Gender)
+accoma_FreqTable<-table(Accomadation)
+barplot(gender_FreqTable,main = "Barplot for gender", xlab ="Gender",ylab ="Frequency" )
+abline(h=0)
+barplot(accoma_FreqTable,main = "Barplot for accomadation", xlab ="Accomadation",ylab="Frequency"  )
+abline(h=0)
+pie(gender_FreqTable,main ="pie chart for gender")
+pie(accoma_FreqTable,main ="pie chart for accomadation" )
+
+hist(Age, main ="Histogram for Age" )
+abline(h=0)
+boxplot(Age,main="Boxplot for Age",horizontal =TRUE )
+gender_Accoma_FreqTable<-table(Gender,Accomadation)
+barplot(gender_Accoma_FreqTable,main = "Barplot for gender and accomadation",xlab="Accomadation",ylab="Frequency",legend=rownames(gender_Accoma_FreqTable))
+abline(h=0)
+barplot(gender_Accoma_FreqTable,beside = TRUE, main="Multiple barchart", xlab="Accomadation",ylab ="Frequency",legend=rownames(gender_Accoma_FreqTable) )
+abline(h=0)
+boxplot(Age~Gender,main="side by side boxplot",xlab ="Age",ylab ="Gender", horizontal=TRUE )
+boxplot(Age~Accomadation,main="side by side boxplot",xlab ="Age",ylab ="Accomadation", horizontal=TRUE )
+xtabs(Age~Gender+Accomadation)/gender_Accoma_FreqTable
